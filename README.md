@@ -16,6 +16,34 @@ If you are new here, the fastest way to get oriented is the
 For the full model list and API reference, see the
 [online documentation](https://projecttorreypines.github.io/TurbulentTransport.jl/dev).
 
+## ITER iterfuse models (this fork)
+
+This is Tim Slendebroek's fork of
+[ProjectTorreyPines/TurbulentTransport.jl](https://github.com/ProjectTorreyPines/TurbulentTransport.jl).
+It tracks upstream and adds two standalone TGLF-NN ensembles trained on ITER flux-matching data,
+loadable by name like any built-in model:
+
+| Model | Saturation rule | Training data | Held-out R² (asinh), Qe / Qi |
+|---|---|---|---|
+| `sat1_em_iterfuse2s_azf-1` | SAT1 | 1.5M full-TJLF labels on perturbed ITER flux-matching inputs | 0.976 / 0.979 |
+| `sat3_em_iterfuse2s_azf-1` | SAT3 | 1.5M labels from TJLF 1.3.1 with the SAT3 NaN fix | 0.973 / 0.973 |
+
+Install the fork in place of the registered package, then pick a model:
+
+```julia
+using Pkg
+Pkg.add(url="https://github.com/TimSlendebroek/TurbulentTransport_Design.jl")
+
+using FUSE
+act.ActorTGLF.model = :TGLFNN
+act.ActorTGLF.tglfnn_model = "sat1_em_iterfuse2s_azf-1"
+```
+
+- The models were trained on lumped-ion inputs, FUSE's default `lump_ions = true`.
+- The saturation rule is carried by the model name. `act.ActorTGLF.sat_rule` has no effect on a TGLF-NN run.
+- Each is a 20-member ensemble with an encoder, eight 64-wide residual blocks and a decoder. Model cards sit next to the weights in `models/*.md`.
+- The weights are plain git files rather than Git LFS objects, because the on-demand LFS download in `src/models.jl` only looks in the upstream repository.
+
 ## Quick start
 
 Add the package (it lives in the ProjectTorreyPines registry):
