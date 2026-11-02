@@ -1,3 +1,10 @@
+> [!NOTE]
+> **About this fork.** TurbulentTransport_Design is part of [FUSE_Design](https://github.com/TimSlendebroek/FUSE_Design.jl), a public, stable version of the FUSE
+> stack focused on **fusion power-plant design** rather than the time-dependent, digital-twin direction of upstream.
+> The design stack pins upstream **v1.2.17** (tag `v1.2.17`). `master` follows upstream (v1.4.0) plus ITER
+> TGLF-NN models; upstream's own history is on the `upstream-master` branch.
+> To install the whole stack, see [Installing the design stack](https://github.com/TimSlendebroek/FUSE_Design.jl#installing-the-design-stack).
+
 [![CI](https://github.com/ProjectTorreyPines/TurbulentTransport.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/ProjectTorreyPines/TurbulentTransport.jl/actions/workflows/CI.yml)
 [![codecov](https://codecov.io/github/ProjectTorreyPines/TurbulentTransport.jl/graph/badge.svg?token=6CdJLykYa9)](https://codecov.io/github/ProjectTorreyPines/TurbulentTransport.jl)
 
